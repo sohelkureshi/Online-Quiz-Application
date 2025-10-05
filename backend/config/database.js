@@ -19,9 +19,9 @@ if (!fs.existsSync(dbDir)) {
 // Create SQLite database connection with verbose mode for debugging
 const db = new sqlite3.Database(DB_PATH, (err) => {
   if (err) {
-    console.error('❌ Error connecting to database:', err.message);
+    console.error(' Error connecting to database:', err.message);
   } else {
-    console.log('✅ Connected to SQLite database');
+    console.log(' Connected to SQLite database');
   }
 });
 
@@ -73,7 +73,7 @@ export const initializeDatabase = () => {
         if (err) {
           reject(err);
         } else {
-          console.log('✅ Database tables initialized');
+          console.log('Database tables initialized');
           resolve();
         }
       });

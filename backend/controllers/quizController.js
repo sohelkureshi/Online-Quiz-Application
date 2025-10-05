@@ -2,10 +2,7 @@ import Question from '../models/Question.js';
 import QuizResult from '../models/QuizResult.js';
 import { calculateScore } from '../utils/Helpers.js';
 
-/**
- * Get random 15 questions for the quiz (5 easy, 5 medium, 5 hard)
- * WITHOUT correct answers
- */
+//Get random 15 questions for the quiz (5 easy, 5 medium, 5 hard)
 export const getQuizQuestions = async (req, res, next) => {
   try {
     // Get random questions by difficulty
@@ -28,10 +25,7 @@ export const getQuizQuestions = async (req, res, next) => {
   }
 };
 
-/**
- * Submit quiz answers and get score with detailed results
- * NOW: Counts all 15 questions (unattempted = wrong)
- */
+//Submit quiz answers and get score with detailed results
 export const submitQuizAnswers = async (req, res, next) => {
   try {
     const { answers, userName, timeTaken, questionIds } = req.body;
@@ -90,9 +84,8 @@ export const submitQuizAnswers = async (req, res, next) => {
   }
 };
 
-/**
- * Get quiz statistics (optional endpoint)
- */
+
+// Get quiz statistics (optional endpoint)
 export const getQuizStats = async (req, res, next) => {
   try {
     const stats = await QuizResult.getStats();

@@ -1,6 +1,5 @@
-/**
- * Validation middleware for quiz answers submission
- */
+
+// Validation middleware for quiz answers submission
 export const validateAnswers = (req, res, next) => {
   const { answers } = req.body;
 
@@ -61,9 +60,8 @@ export const validateAnswers = (req, res, next) => {
   next();
 };
 
-/**
- * Validate query parameters for pagination
- */
+
+// Validate query parameters for pagination
 export const validatePagination = (req, res, next) => {
   const { limit, offset } = req.query;
 

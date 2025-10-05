@@ -6,9 +6,8 @@ node_modules/
 .env.local
 .env.*.local
 
-# Database
-database/*.db
-database/*.db-journal
+# Database (don't ignore - we need it deployed)
+# database/*.db   <- REMOVE THIS LINE OR COMMENT IT OUT
 
 # Logs
 logs/

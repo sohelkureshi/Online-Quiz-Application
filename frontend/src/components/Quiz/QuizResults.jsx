@@ -51,7 +51,7 @@ const QuizResults = () => {
         </div>
         
         <h2 className="results-title">
-          {userName ? `Great Job, ${userName}!` : 'Quiz Completed!'}
+          {userName ? `Quiz Completed, ${userName}!` : 'Quiz Completed!'}
         </h2>
         
         <div className="score-display">

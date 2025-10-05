@@ -3,24 +3,18 @@ import { useQuizContext } from '../../context/QuizContext';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import Loader from '../UI/Loader';
-import { getFromLocalStorage, saveToLocalStorage } from '../../utils/helpers';
-import { STORAGE_KEYS } from '../../utils/constants';
 import '../../styles/QuizStart.css';
 
 const QuizStart = () => {
   const { startQuiz, loading, error } = useQuizContext();
-  const [name, setName] = useState(getFromLocalStorage(STORAGE_KEYS.userName, ''));
-  const [showInstructions, setShowInstructions] = useState(true);
+  // Don't persist name - start fresh each time
+  const [name, setName] = useState('');
 
-const handleStartQuiz = () => {
-  if (name.trim()) {
-    saveToLocalStorage(STORAGE_KEYS.userName, name.trim());
-  }
-  // Track quiz start time for elapsed calculation
-  sessionStorage.setItem('quizStartTime', Date.now().toString());
-  startQuiz(name.trim() || 'Anonymous');
-};
-
+  const handleStartQuiz = () => {
+    // Track quiz start time for elapsed calculation
+    sessionStorage.setItem('quizStartTime', Date.now().toString());
+    startQuiz(name.trim() || 'Anonymous');
+  };
 
   if (loading) {
     return (
@@ -62,27 +56,22 @@ const handleStartQuiz = () => {
           />
         </div>
 
-        {/* Instructions Section */}
-        {showInstructions && (
-          <div className="instructions-section">
-            <div className="instructions-header">
-              <h3 className="instructions-title">📋 Instructions</h3>
-              <button 
-                className="close-instructions"
-                onClick={() => setShowInstructions(false)}
-              >
-                ×
-              </button>
-            </div>
-            <ul className="instructions-list">
-              <li>⏱️ Complete the quiz within the time limit</li>
-              <li>🎯 Choose one answer for each question</li>
-              <li>↔️ Navigate between questions anytime</li>
-              <li>📊 Review your performance at the end</li>
-              <li>🔄 You can retake the quiz anytime</li>
-            </ul>
+        {/* Instructions Section - Always Visible, No Close Button */}
+        <div className="instructions-section">
+          <div className="instructions-header">
+            <h3 className="instructions-title">📋 Instructions</h3>
           </div>
-        )}
+          <ul className="instructions-list">
+            <li>⏱️ Complete the quiz within 10 minutes time limit</li>
+            <li>🎯 Choose one answer for each question</li>
+            <li>↔️ Navigate between questions anytime</li>
+            <li>⏭️ You can skip questions and come back later</li>
+            <li>🔄 Clear your answer if you change your mind</li>
+            <li>❌ No negative marking - unanswered questions are simply marked incorrect</li>
+            <li>📊 Review your detailed performance at the end</li>
+            <li>🔁 You can retake the quiz anytime</li>
+          </ul>
+        </div>
 
         {/* Features Grid */}
         <div className="features-grid">
@@ -122,7 +111,7 @@ const handleStartQuiz = () => {
           </span>
         </Button>
 
-        {/* Stats Preview (Optional) */}
+        {/* Stats Preview */}
         <div className="stats-preview">
           <div className="stat-item">
             <span className="stat-value">15</span>

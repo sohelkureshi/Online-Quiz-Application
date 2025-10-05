@@ -1,6 +1,6 @@
 import Question from '../models/Question.js';
 import QuizResult from '../models/QuizResult.js';
-import { calculateScore } from '../utils/Helpers.js';
+import { calculateScore } from '../utils/helpers.js';
 
 //Get random 15 questions for the quiz (5 easy, 5 medium, 5 hard)
 export const getQuizQuestions = async (req, res, next) => {

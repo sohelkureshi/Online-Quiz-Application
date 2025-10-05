@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeAll } from '@jest/globals';
-import { calculateScore, formatTime, shuffleArray } from '../utils/Helpers.js';
+import { calculateScore, formatTime, shuffleArray } from '../utils/helpers.js';
 
 /**
  * Test Suite for Quiz Scoring Logic

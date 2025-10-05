@@ -1,0 +1,47 @@
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-2xl);
+}
+
+.loader {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.loader-circle {
+  width: 12px;
+  height: 12px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+.loader-circle:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loader-circle:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+.loader-text {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Loader Sizes */
+.loader-container.small .loader-circle {
+  width: 8px;
+  height: 8px;
+}
+
+.loader-container.large .loader-circle {
+  width: 16px;
+  height: 16px;
+}

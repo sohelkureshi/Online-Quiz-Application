@@ -7,8 +7,7 @@ A full-stack web application for conducting online quizzes with real-time timer,
 QuizMaster is an interactive quiz platform that randomly selects 15 questions from a database of 60 questions (categorized by difficulty: easy, medium, hard) to provide a unique quiz experience each time. The application features a modern glassmorphism UI, real-time countdown timer, and comprehensive result analysis.
 
 **Live Demo:**
-- Frontend: https://online-quiz-application-xi.vercel.app/
-- Backend API: https://online-quiz-backend-7kks.onrender.com/api
+-  https://online-quiz-application-xi.vercel.app/
 
 ## Features
 
@@ -173,26 +172,17 @@ cd backend
 npm test
 ```
 
-3. Run tests with coverage:
-```bash
-npm run test:coverage
-```
 
 **Test Coverage:**
 - Scoring logic for all correct answers
 - Scoring logic for partial correct answers
 - Scoring logic for all wrong answers
-- Handling of unattempted questions
-- Edge cases (empty answers, invalid data)
-- Helper function tests (time formatting, array operations)
+- Handling of unanswered questions (marked as incorrect)
+- Edge cases such as empty answer submissions
+- Helper function tests including time formatting and array operations
+- Verification that unanswered questions count toward total score
+- Percentage calculation for different score combinations
 
-### Frontend Tests
-
-Frontend tests can be run using:
-```bash
-cd frontend
-npm test
-```
 
 ## API Endpoints
 
@@ -217,10 +207,19 @@ Submit quiz answers and get results
 }
 ```
 - Returns: Score, percentage, detailed results with correct/incorrect breakdown
+- 
+## Assumptions 
 
+<<<<<<< HEAD
 
+=======
+**1. Free Tier Limitations:**
+The Render free tier causes the backend to spin down after 15 minutes of inactivity, resulting in a 30-second cold start on the first request. This is acceptable for a demonstration project but would require a paid tier for production use.
 
-## Design Choices and Assumptions
+**2. Enhanced User Experience Features:**
+I implemented skip and clear answer functionality to improve quiz flexibility. Users can skip questions and return to them later, or clear their selected answer if they change their mind.
+>>>>>>> 77de710bf7639f754ee5aa66cb264e686c3ddef9
+
 
 ### Architecture Decisions
 
@@ -242,69 +241,11 @@ I used React's Context API instead of Redux for state management as the applicat
 - No negative marking is applied
 - The total score is always out of 15, regardless of how many questions were attempted
 
-**6. Timer Implementation:**
-The timer is managed on the frontend with a custom hook. When time expires, the quiz is automatically submitted with the current answers. The elapsed time is calculated as (QUIZ_TIME_LIMIT - timeRemaining) to accurately track how long the user took.
-
-### User Experience Assumptions
-
-**1. No User Authentication:**
+**6. No User Authentication:**
 The application does not require user login. Users can optionally provide their name, but it's not mandatory. This lowers the barrier to entry and makes it easy to try the quiz.
 
-**2. Single Quiz Session:**
+**7. Single Quiz Session:**
 Users can take one quiz at a time. There's no quiz history or user profile. For a production application, implementing user accounts would enable tracking progress over multiple attempts.
-
-**3. Question Navigation:**
-Users can navigate freely between questions during the quiz. This mimics real exam experiences where reviewing previous questions is allowed.
-
-**4. No Pause Functionality:**
-The timer cannot be paused once started. This maintains quiz integrity and prevents gaming the system.
-
-**5. Results Visibility:**
-After submission, users can see which questions they answered correctly/incorrectly along with the correct answers. This provides a learning opportunity.
-
-### Technical Assumptions
-
-**1. Browser Compatibility:**
-The application assumes users are on modern browsers (Chrome, Firefox, Safari, Edge) that support ES6+, CSS Grid, and Flexbox.
-
-**2. Network Connectivity:**
-The frontend assumes a stable internet connection. If the backend becomes unavailable, appropriate error messages are displayed.
-
-**3. Single Region Deployment:**
-Both frontend and backend are deployed in single regions (Vercel global CDN, Render Singapore). For global applications, multi-region deployment would improve latency.
-
-**4. Free Tier Limitations:**
-The Render free tier causes the backend to spin down after 15 minutes of inactivity, resulting in a 30-second cold start on the first request. This is acceptable for a demonstration project but would require a paid tier for production use.
-
-### Data Model Decisions
-
-**1. Question Schema:**
-Each question has:
-- Unique ID
-- Question text
-- Four options (A, B, C, D)
-- Correct option reference
-- Difficulty level
-- Category
-
-This structure is simple and meets the requirements without over-engineering.
-
-**2. No Question Relationships:**
-Questions are independent entities with no relationships to categories or tags. This keeps the data model simple but limits advanced filtering capabilities.
-
-**3. Static Question Pool:**
-The 60 questions are seeded once and remain static. In a production application, an admin interface for adding/editing questions would be necessary.
-
-### Security Considerations
-
-**1. CORS Configuration:**
-CORS is configured to allow requests only from the deployed frontend URL. For development, localhost is also allowed.
-
-**2. No Sensitive Data:**
-Since there's no user authentication or sensitive data, security requirements are minimal. Quiz questions and answers are considered public information.
-
-**3. Input Validation:**
-Basic validation is implemented on the backend to ensure answers are in the correct format, but extensive validation isn't necessary given the low-risk nature of the application.
 
 ## Deployment
 
@@ -367,12 +308,9 @@ This project is licensed under the ISC License.
 
 Sohel Kureshi
 - GitHub: https://github.com/sohelkureshi
+- Myportfolio : https://sohelkureshi.github.io/me/
 - VNIT Nagpur, 2025 Batch
 
-## Acknowledgments
 
-- Built as a full-stack development demonstration project
-- Inspired by online learning platforms
-- UI design influenced by modern glassmorphism trends
 
-[1](http://readme.md)
+

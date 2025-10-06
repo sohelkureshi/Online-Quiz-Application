@@ -174,14 +174,14 @@ npm test
 
 
 **Test Coverage:**
--Scoring logic for all correct answers
--Scoring logic for partial correct answers
--Scoring logic for all wrong answers
--Handling of unanswered questions (marked as incorrect)
--Edge cases such as empty answer submissions
--Helper function tests including time formatting and array operations
--Verification that unanswered questions count toward total score
--Percentage calculation for different score combinations
+- Scoring logic for all correct answers
+- Scoring logic for partial correct answers
+- Scoring logic for all wrong answers
+- Handling of unanswered questions (marked as incorrect)
+- Edge cases such as empty answer submissions
+- Helper function tests including time formatting and array operations
+- Verification that unanswered questions count toward total score
+- Percentage calculation for different score combinations
 
 
 ## API Endpoints
@@ -312,4 +312,5 @@ Sohel Kureshi
 - GitHub: https://github.com/sohelkureshi
 - Myportfolio : https://sohelkureshi.github.io/me/
 - VNIT Nagpur, 2025 Batch
+
 

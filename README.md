@@ -208,7 +208,7 @@ Submit quiz answers and get results
 ```
 - Returns: Score, percentage, detailed results with correct/incorrect breakdown
 - 
-#### Assumptions 
+## Assumptions 
 
 **1. Free Tier Limitations:**
 The Render free tier causes the backend to spin down after 15 minutes of inactivity, resulting in a 30-second cold start on the first request. This is acceptable for a demonstration project but would require a paid tier for production use.
@@ -307,6 +307,7 @@ Sohel Kureshi
 - GitHub: https://github.com/sohelkureshi
 - Myportfolio : https://sohelkureshi.github.io/me/
 - VNIT Nagpur, 2025 Batch
+
 
 
 

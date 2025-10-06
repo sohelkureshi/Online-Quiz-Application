@@ -7,11 +7,9 @@ import '../../styles/QuizStart.css';
 
 const QuizStart = () => {
   const { startQuiz, loading, error } = useQuizContext();
-  // Don't persist name - start fresh each time
   const [name, setName] = useState('');
 
   const handleStartQuiz = () => {
-    // Track quiz start time for elapsed calculation
     sessionStorage.setItem('quizStartTime', Date.now().toString());
     startQuiz(name.trim() || 'Anonymous');
   };
@@ -21,7 +19,15 @@ const QuizStart = () => {
       <div className="quiz-start">
         <Card className="start-card loading-card">
           <Loader />
-          <p className="loading-text">Loading questions...</p>
+          <div className="loading-messages">
+            <p className="loading-text primary">Loading questions...</p>
+            <p className="loading-text secondary">
+              If this is taking longer than usual, our server might be waking up.
+            </p>
+            <p className="loading-text secondary">
+              This usually takes about 30 seconds on the first visit.
+            </p>
+          </div>
         </Card>
       </div>
     );
@@ -30,7 +36,6 @@ const QuizStart = () => {
   return (
     <div className="quiz-start">
       <Card className="start-card">
-        {/* Hero Section */}
         <div className="hero-section">
           <div className="hero-icon">🚀</div>
           <h2 className="hero-title">Welcome to QuizMaster</h2>
@@ -39,7 +44,6 @@ const QuizStart = () => {
           </p>
         </div>
 
-        {/* Name Input Section */}
         <div className="name-section">
           <label htmlFor="userName" className="input-label">
             What's Your Name? <span className="optional">(Optional)</span>
@@ -56,7 +60,6 @@ const QuizStart = () => {
           />
         </div>
 
-        {/* Instructions Section - Always Visible, No Close Button */}
         <div className="instructions-section">
           <div className="instructions-header">
             <h3 className="instructions-title">📋 Instructions</h3>
@@ -73,7 +76,6 @@ const QuizStart = () => {
           </ul>
         </div>
 
-        {/* Features Grid */}
         <div className="features-grid">
           <div className="feature-item">
             <span className="feature-icon">⚡</span>
@@ -89,15 +91,20 @@ const QuizStart = () => {
           </div>
         </div>
 
-        {/* Error Display */}
         {error && (
           <div className="error-message">
             <span className="error-icon">⚠️</span>
-            <span>{error}</span>
+            <div className="error-content">
+              <span className="error-text">{error}</span>
+              {error.includes('starting up') && (
+                <span className="error-hint">
+                  Our free server takes about 30 seconds to wake up. Please try again.
+                </span>
+              )}
+            </div>
           </div>
         )}
 
-        {/* Start Button */}
         <Button 
           onClick={handleStartQuiz}
           variant="primary"
@@ -111,7 +118,6 @@ const QuizStart = () => {
           </span>
         </Button>
 
-        {/* Stats Preview */}
         <div className="stats-preview">
           <div className="stat-item">
             <span className="stat-value">15</span>
@@ -127,6 +133,13 @@ const QuizStart = () => {
             <span className="stat-value">60%</span>
             <span className="stat-label">To Pass</span>
           </div>
+        </div>
+
+        {/* Server status note */}
+        <div className="server-note">
+          <p className="note-text">
+            Note: First load may take 10 seconds as our server wakes up (free hosting limitation).
+          </p>
         </div>
       </Card>
     </div>

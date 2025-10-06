@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { fetchQuestions, submitAnswers } from '../services/api';
+import { fetchQuestions, submitAnswers, wakeUpServer } from '../services/api';
 import { QUIZ_TIME_LIMIT } from '../utils/constants';
 
 // Create Context
@@ -27,24 +27,37 @@ export const QuizProvider = ({ children }) => {
   const [userName, setUserName] = useState('');
   const [timeTaken, setTimeTaken] = useState(0);
 
+
+
   // Start the quiz - fetch questions from API
-  const startQuiz = useCallback(async (name) => {
-    try {
-      setLoading(true);
-      setError(null);
-      setUserName(name);
-      
-      const data = await fetchQuestions();
-      setQuestions(data);
-      setQuizState('quiz');
-      setCurrentQuestionIndex(0);
-      setUserAnswers({});
-    } catch (err) {
-      setError(err.message || 'Failed to load questions');
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+const startQuiz = useCallback(async (name) => {
+  try {
+    setLoading(true);
+    setError(null);
+    setUserName(name);
+    
+    // First, wake up the server if it's sleeping
+    console.log('🔄 Checking server status...');
+    await wakeUpServer();
+    
+    // Small delay to ensure server is fully ready
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Now fetch questions
+    console.log('📥 Fetching questions...');
+    const data = await fetchQuestions();
+    
+    setQuestions(data);
+    setQuizState('quiz');
+    setCurrentQuestionIndex(0);
+    setUserAnswers({});
+  } catch (err) {
+    console.error('Error starting quiz:', err);
+    setError(err.message || 'Failed to load questions. The server might be starting up. Please try again in a moment.');
+  } finally {
+    setLoading(false);
+  }
+}, []);
 
   // Answer current question
   const answerQuestion = useCallback((questionId, selectedOption) => {

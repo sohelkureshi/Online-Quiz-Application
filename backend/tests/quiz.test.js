@@ -39,9 +39,11 @@ describe('Quiz Scoring Logic', () => {
 
     expect(result.score).toBe(3);
     expect(result.totalQuestions).toBe(3);
+    expect(result.attemptedQuestions).toBe(3);
     expect(result.percentage).toBe(100);
     expect(result.detailedResults).toHaveLength(3);
     expect(result.detailedResults[0].isCorrect).toBe(true);
+    expect(result.detailedResults[0].isAttempted).toBe(true);
   });
 
   test('should calculate correct score for partial correct answers', () => {
@@ -55,8 +57,10 @@ describe('Quiz Scoring Logic', () => {
 
     expect(result.score).toBe(2);
     expect(result.totalQuestions).toBe(3);
+    expect(result.attemptedQuestions).toBe(3);
     expect(result.percentage).toBe(66.67);
     expect(result.detailedResults[1].isCorrect).toBe(false);
+    expect(result.detailedResults[1].isAttempted).toBe(true);
   });
 
   test('should calculate score as 0 for all wrong answers', () => {
@@ -70,17 +74,39 @@ describe('Quiz Scoring Logic', () => {
 
     expect(result.score).toBe(0);
     expect(result.totalQuestions).toBe(3);
+    expect(result.attemptedQuestions).toBe(3);
     expect(result.percentage).toBe(0);
   });
 
-  test('should handle empty user answers array', () => {
+  test('should handle empty user answers array and count all questions', () => {
     const userAnswers = [];
     const result = calculateScore(userAnswers, sampleQuestions);
 
     expect(result.score).toBe(0);
-    expect(result.totalQuestions).toBe(0);
+    expect(result.totalQuestions).toBe(3);
+    expect(result.attemptedQuestions).toBe(0);
     expect(result.percentage).toBe(0);
-    expect(result.detailedResults).toHaveLength(0);
+    expect(result.detailedResults).toHaveLength(3);
+    expect(result.detailedResults[0].isAttempted).toBe(false);
+    expect(result.detailedResults[0].isCorrect).toBe(false);
+  });
+
+  test('should handle partially attempted questions', () => {
+    const userAnswers = [
+      { questionId: 1, selectedOption: 'B' }, // Correct
+      { questionId: 2, selectedOption: 'A' }  // Wrong
+      // Question 3 not attempted
+    ];
+
+    const result = calculateScore(userAnswers, sampleQuestions);
+
+    expect(result.score).toBe(1);
+    expect(result.totalQuestions).toBe(3);
+    expect(result.attemptedQuestions).toBe(2);
+    expect(result.percentage).toBe(33.33);
+    expect(result.detailedResults).toHaveLength(3);
+    expect(result.detailedResults[2].isAttempted).toBe(false);
+    expect(result.detailedResults[2].isCorrect).toBe(false);
   });
 
   test('should include detailed results with correct structure', () => {
@@ -96,6 +122,7 @@ describe('Quiz Scoring Logic', () => {
     expect(detailedResult).toHaveProperty('userAnswer');
     expect(detailedResult).toHaveProperty('correctAnswer');
     expect(detailedResult).toHaveProperty('isCorrect');
+    expect(detailedResult).toHaveProperty('isAttempted');
     expect(detailedResult).toHaveProperty('options');
   });
 
@@ -123,6 +150,24 @@ describe('Quiz Scoring Logic', () => {
       const result = calculateScore(userAnswers, questions);
       expect(result.percentage).toBe(expected);
     });
+  });
+
+  test('should mark unanswered questions correctly in detailed results', () => {
+    const userAnswers = [
+      { questionId: 1, selectedOption: 'B' }
+      // Questions 2 and 3 not attempted
+    ];
+
+    const result = calculateScore(userAnswers, sampleQuestions);
+
+    expect(result.detailedResults[0].isAttempted).toBe(true);
+    expect(result.detailedResults[0].userAnswer).toBe('B');
+    
+    expect(result.detailedResults[1].isAttempted).toBe(false);
+    expect(result.detailedResults[1].userAnswer).toBe(null);
+    
+    expect(result.detailedResults[2].isAttempted).toBe(false);
+    expect(result.detailedResults[2].userAnswer).toBe(null);
   });
 });
 

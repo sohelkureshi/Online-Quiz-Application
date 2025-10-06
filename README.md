@@ -218,14 +218,7 @@ Submit quiz answers and get results
 ```
 - Returns: Score, percentage, detailed results with correct/incorrect breakdown
 
-### GET /api/quiz/stats
-Get overall quiz statistics (optional)
-- Returns: Total attempts, average score, highest/lowest scores
 
-### GET /api/quiz/leaderboard
-Get top scores (optional)
-- Query params: limit (default: 10)
-- Returns: Top scoring users
 
 ## Design Choices and Assumptions
 
@@ -354,7 +347,6 @@ Basic validation is implemented on the backend to ensure answers are in the corr
 - Admin panel for question CRUD operations
 - Question categories and topic-based filtering
 - Difficulty-based quiz modes
-- Timed challenges and leaderboards
 - Social sharing of results
 - Multi-language support
 - Accessibility improvements (WCAG compliance)

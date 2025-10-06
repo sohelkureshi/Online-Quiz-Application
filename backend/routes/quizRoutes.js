@@ -2,8 +2,6 @@ import express from 'express';
 import {
   getQuizQuestions,
   submitQuizAnswers,
-  getQuizStats,
-  getLeaderboard,
   checkQuizHealth
 } from '../controllers/quizController.js';
 import { validateAnswers } from '../middleware/validator.js';
@@ -25,20 +23,6 @@ router.get('/questions', getQuizQuestions);
  */
 router.post('/submit', validateAnswers, submitQuizAnswers);
 
-/**
- * @route   GET /api/quiz/stats
- * @desc    Get quiz statistics and top scores
- * @access  Public
- */
-router.get('/stats', getQuizStats);
-
-/**
- * @route   GET /api/quiz/leaderboard
- * @desc    Get leaderboard (top scores)
- * @access  Public
- * @query   limit (optional) - number of results to return
- */
-router.get('/leaderboard', getLeaderboard);
 
 /**
  * @route   GET /api/quiz/health

@@ -85,42 +85,6 @@ export const submitQuizAnswers = async (req, res, next) => {
 };
 
 
-// Get quiz statistics (optional endpoint)
-export const getQuizStats = async (req, res, next) => {
-  try {
-    const stats = await QuizResult.getStats();
-    const topScores = await QuizResult.getTopScores(5);
-
-    res.status(200).json({
-      success: true,
-      data: {
-        statistics: stats,
-        topScores: topScores
-      }
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
-/**
- * Get leaderboard (optional endpoint)
- */
-export const getLeaderboard = async (req, res, next) => {
-  try {
-    const limit = parseInt(req.query.limit) || 10;
-    const leaderboard = await QuizResult.getTopScores(limit);
-
-    res.status(200).json({
-      success: true,
-      count: leaderboard.length,
-      data: leaderboard
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-
 /**
  * Health check for quiz system
  */

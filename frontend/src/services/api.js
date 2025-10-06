@@ -112,28 +112,8 @@ export const submitAnswers = async (submissionData) => {
   }
 };
 
-/**
- * Get quiz statistics (optional)
- */
-export const fetchQuizStats = async () => {
-  try {
-    const response = await api.get('/quiz/stats');
-    return response.data.data;
-  } catch (error) {
-    throw error;
-  }
-};
 
-/**
- * Get leaderboard (optional)
- */
-export const fetchLeaderboard = async (limit = 10) => {
-  try {
-    const response = await api.get(`/quiz/leaderboard?limit=${limit}`);
-    return response.data.data;
-  } catch (error) {
-    throw error;
-  }
-};
+
+
 
 export default api;

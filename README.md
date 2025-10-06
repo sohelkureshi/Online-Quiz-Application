@@ -210,15 +210,12 @@ Submit quiz answers and get results
 - 
 ## Assumptions 
 
-<<<<<<< HEAD
 
-=======
 **1. Free Tier Limitations:**
 The Render free tier causes the backend to spin down after 15 minutes of inactivity, resulting in a 30-second cold start on the first request. This is acceptable for a demonstration project but would require a paid tier for production use.
 
 **2. Enhanced User Experience Features:**
 I implemented skip and clear answer functionality to improve quiz flexibility. Users can skip questions and return to them later, or clear their selected answer if they change their mind.
->>>>>>> 77de710bf7639f754ee5aa66cb264e686c3ddef9
 
 
 ### Architecture Decisions
@@ -310,6 +307,7 @@ Sohel Kureshi
 - GitHub: https://github.com/sohelkureshi
 - Myportfolio : https://sohelkureshi.github.io/me/
 - VNIT Nagpur, 2025 Batch
+
 
 
 

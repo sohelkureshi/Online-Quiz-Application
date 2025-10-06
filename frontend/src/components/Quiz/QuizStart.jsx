@@ -25,7 +25,7 @@ const QuizStart = () => {
               If this is taking longer than usual, our server might be waking up.
             </p>
             <p className="loading-text secondary">
-              This usually takes about 30 seconds on the first visit.
+              This usually takes upto 10 seconds on the first visit.
             </p>
           </div>
         </Card>
